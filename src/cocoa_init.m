@@ -517,19 +517,23 @@ GLFWbool _glfwConnectCocoa(int platformID, _GLFWplatform* platform)
         .getWindowOpacity = _glfwGetWindowOpacityCocoa,
         .setWindowResizable = _glfwSetWindowResizableCocoa,
         .setWindowDecorated = _glfwSetWindowDecoratedCocoa,
-        .setWindowFloating = _glfwSetWindowFloatingCocoa,
+        .setWindowFloating = _glfwSetWindowFloatingNull,
         .setWindowOpacity = _glfwSetWindowOpacityCocoa,
         .setWindowMousePassthrough = _glfwSetWindowMousePassthroughCocoa,
         .pollEvents = _glfwPollEventsCocoa,
         .waitEvents = _glfwWaitEventsCocoa,
         .waitEventsTimeout = _glfwWaitEventsTimeoutCocoa,
         .postEmptyEvent = _glfwPostEmptyEventCocoa,
+        
+        // Hazel
+        .getWindowTitleBar = _glfwSetWindowTitlebarNull,
+        
         .getEGLPlatform = _glfwGetEGLPlatformCocoa,
         .getEGLNativeDisplay = _glfwGetEGLNativeDisplayCocoa,
         .getEGLNativeWindow = _glfwGetEGLNativeWindowCocoa,
         .getRequiredInstanceExtensions = _glfwGetRequiredInstanceExtensionsCocoa,
         .getPhysicalDevicePresentationSupport = _glfwGetPhysicalDevicePresentationSupportCocoa,
-        .createWindowSurface = _glfwCreateWindowSurfaceCocoa
+        .createWindowSurface = _glfwCreateWindowSurfaceCocoa,
     };
 
     *platform = cocoa;
