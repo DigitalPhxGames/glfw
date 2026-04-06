@@ -406,6 +406,7 @@ struct _GLFWwndconfig
     bool          resizable;
     bool          visible;
     bool          decorated;
+    bool          titlebar;
     bool          focused;
     bool          autoIconify;
     bool          floating;

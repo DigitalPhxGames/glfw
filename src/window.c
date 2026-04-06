@@ -276,6 +276,7 @@ void glfwDefaultWindowHints(void)
     _glfw.hints.window.resizable    = true;
     _glfw.hints.window.visible      = true;
     _glfw.hints.window.decorated    = true;
+    _glfw.hints.window.titlebar     = true;
     _glfw.hints.window.focused      = true;
     _glfw.hints.window.autoIconify  = true;
     _glfw.hints.window.centerCursor = true;
@@ -358,6 +359,9 @@ GLFWAPI void glfwWindowHint(int hint, int value)
             return;
         case GLFW_DECORATED:
             _glfw.hints.window.decorated = value;
+            return;
+        case GLFW_TITLEBAR:
+            _glfw.hints.window.titlebar = value;
             return;
         case GLFW_FOCUSED:
             _glfw.hints.window.focused = value;
@@ -914,7 +918,7 @@ GLFWAPI int glfwGetWindowAttrib(GLFWwindow* handle, int attrib)
         case GLFW_DECORATED:
             return window->decorated;
         case GLFW_TITLEBAR:
-            return _glfw.hints.window.titlebar;
+            return window->titlebar;
         case GLFW_FLOATING:
             return window->floating;
         case GLFW_AUTO_ICONIFY:
@@ -977,10 +981,7 @@ GLFWAPI void glfwSetWindowAttrib(GLFWwindow* handle, int attrib, int value)
             return;
         
         case GLFW_TITLEBAR:
-            if (_glfw.hints.window.titlebar == value)
-                return;
-
-            _glfw.hints.window.titlebar = value;
+            window->titlebar = value;
             if (!window->monitor)
                 _glfw.platform.setWindowTitleBar(window, value);
             return;
