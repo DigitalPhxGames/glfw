@@ -186,22 +186,28 @@ static int choosePixelFormatWGL(_GLFWwindow* window,
             u->accumAlphaBits = FIND_ATTRIB_VALUE(WGL_ACCUM_ALPHA_BITS_ARB);
 
             u->auxBuffers = FIND_ATTRIB_VALUE(WGL_AUX_BUFFERS_ARB);
-            u->stereo = FIND_ATTRIB_VALUE(WGL_STEREO_ARB);
+
+            if (FIND_ATTRIB_VALUE(WGL_STEREO_ARB))
+                u->stereo = GLFW_TRUE;
 
             if (_glfw.wgl.ARB_multisample)
                 u->samples = FIND_ATTRIB_VALUE(WGL_SAMPLES_ARB);
 
             if (ctxconfig->client == GLFW_OPENGL_API)
             {
-                if (_glfw.wgl.ARB_framebuffer_sRGB || _glfw.wgl.EXT_framebuffer_sRGB)
-                    u->sRGB = FIND_ATTRIB_VALUE(WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB);
+                if (_glfw.wgl.ARB_framebuffer_sRGB ||
+                    _glfw.wgl.EXT_framebuffer_sRGB)
+                {
+                    if (FIND_ATTRIB_VALUE(WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB))
+                        u->sRGB = GLFW_TRUE;
+                }
             }
             else
             {
                 if (_glfw.wgl.EXT_colorspace)
                 {
                     if (FIND_ATTRIB_VALUE(WGL_COLORSPACE_EXT) == WGL_COLORSPACE_SRGB_EXT)
-                        u->sRGB = true;
+                        u->sRGB = GLFW_TRUE;
                 }
             }
         }
@@ -255,7 +261,9 @@ static int choosePixelFormatWGL(_GLFWwindow* window,
             u->accumAlphaBits = pfd.cAccumAlphaBits;
 
             u->auxBuffers = pfd.cAuxBuffers;
-            u->stereo = (pfd.dwFlags & PFD_STEREO);
+
+            if (pfd.dwFlags & PFD_STEREO)
+                u->stereo = GLFW_TRUE;
         }
 
         u->handle = pixelFormat;
@@ -656,7 +664,7 @@ GLFWbool _glfwCreateContextWGL(_GLFWwindow* window,
         if (ctxconfig->noerror)
         {
             if (_glfw.wgl.ARB_create_context_no_error)
-                SET_ATTRIB(WGL_CONTEXT_OPENGL_NO_ERROR_ARB, true);
+                SET_ATTRIB(WGL_CONTEXT_OPENGL_NO_ERROR_ARB, GLFW_TRUE);
         }
 
         // NOTE: Only request an explicitly versioned context when necessary, as

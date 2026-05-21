@@ -49,18 +49,18 @@ static GLFWerrorfun _glfwErrorCallback;
 static GLFWallocator _glfwInitAllocator;
 static _GLFWinitconfig _glfwInitHints =
 {
-    .hatButtons = true,
+    .hatButtons = GLFW_TRUE,
     .angleType = GLFW_ANGLE_PLATFORM_TYPE_NONE,
     .platformID = GLFW_ANY_PLATFORM,
     .vulkanLoader = NULL,
     .ns =
     {
-        .menubar = true,
-        .chdir = true
+        .menubar = GLFW_TRUE,
+        .chdir = GLFW_TRUE
     },
     .x11 =
     {
-        .xcbVulkanSurface = true,
+        .xcbVulkanSurface = GLFW_TRUE,
     },
     .wl =
     {

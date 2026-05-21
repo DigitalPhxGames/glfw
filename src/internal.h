@@ -109,7 +109,6 @@ typedef void (APIENTRY * PFNGLCLEARPROC)(GLbitfield);
 typedef const GLubyte* (APIENTRY * PFNGLGETSTRINGPROC)(GLenum);
 typedef void (APIENTRY * PFNGLGETINTEGERVPROC)(GLenum,GLint*);
 typedef const GLubyte* (APIENTRY * PFNGLGETSTRINGIPROC)(GLenum,GLuint);
-typedef void (APIENTRY * PFNGLFLUSHPROC)(void);
 
 #define EGL_SUCCESS 0x3000
 #define EGL_NOT_INITIALIZED 0x3001
@@ -375,16 +374,16 @@ struct _GLFWerror
 //
 struct _GLFWinitconfig
 {
-    bool          hatButtons;
+    GLFWbool      hatButtons;
     int           angleType;
     int           platformID;
     PFN_vkGetInstanceProcAddr vulkanLoader;
     struct {
-        bool      menubar;
-        bool      chdir;
+        GLFWbool  menubar;
+        GLFWbool  chdir;
     } ns;
     struct {
-        bool      xcbVulkanSurface;
+        GLFWbool  xcbVulkanSurface;
     } x11;
     struct {
         int       libdecorMode;
@@ -403,19 +402,19 @@ struct _GLFWwndconfig
     int           ypos;
     int           width;
     int           height;
-    bool          resizable;
-    bool          visible;
-    bool          decorated;
-    bool          titlebar;
-    bool          focused;
-    bool          autoIconify;
-    bool          floating;
-    bool          maximized;
-    bool          centerCursor;
-    bool          focusOnShow;
-    bool          mousePassthrough;
-    bool          scaleToMonitor;
-    bool          scaleFramebuffer;
+    GLFWbool      resizable;
+    GLFWbool      visible;
+    GLFWbool      decorated;
+    GLFWbool      titlebar;
+    GLFWbool      focused;
+    GLFWbool      autoIconify;
+    GLFWbool      floating;
+    GLFWbool      maximized;
+    GLFWbool      centerCursor;
+    GLFWbool      focusOnShow;
+    GLFWbool      mousePassthrough;
+    GLFWbool      scaleToMonitor;
+    GLFWbool      scaleFramebuffer;
     struct {
         char      frameName[256];
     } ns;
@@ -424,8 +423,8 @@ struct _GLFWwndconfig
         char      instanceName[256];
     } x11;
     struct {
-        bool      keymenu;
-        bool      showDefault;
+        GLFWbool  keymenu;
+        GLFWbool  showDefault;
     } win32;
     struct {
         char      appId[256];
@@ -444,15 +443,15 @@ struct _GLFWctxconfig
     int           source;
     int           major;
     int           minor;
-    bool          forward;
-    bool          debug;
-    bool          noerror;
+    GLFWbool      forward;
+    GLFWbool      debug;
+    GLFWbool      noerror;
     int           profile;
     int           robustness;
     int           release;
     _GLFWwindow*  share;
     struct {
-        bool      offline;
+        GLFWbool  offline;
     } nsgl;
 };
 
@@ -477,11 +476,11 @@ struct _GLFWfbconfig
     int         accumBlueBits;
     int         accumAlphaBits;
     int         auxBuffers;
-    bool        stereo;
+    GLFWbool    stereo;
     int         samples;
-    bool        sRGB;
-    bool        doublebuffer;
-    bool        transparent;
+    GLFWbool    sRGB;
+    GLFWbool    doublebuffer;
+    GLFWbool    transparent;
     uintptr_t   handle;
 };
 
@@ -500,7 +499,6 @@ struct _GLFWcontext
     PFNGLGETSTRINGIPROC  GetStringi;
     PFNGLGETINTEGERVPROC GetIntegerv;
     PFNGLGETSTRINGPROC   GetString;
-    PFNGLFLUSHPROC       Flush;
 
     void (*makeCurrent)(_GLFWwindow*);
     void (*swapBuffers)(_GLFWwindow*);
@@ -813,22 +811,22 @@ struct _GLFWlibrary
         EGLint          major, minor;
         GLFWbool        prefix;
 
-        bool            KHR_create_context;
-        bool            KHR_create_context_no_error;
-        bool            KHR_gl_colorspace;
-        bool            KHR_get_all_proc_addresses;
-        bool            KHR_context_flush_control;
-        bool            EXT_client_extensions;
-        bool            EXT_platform_base;
-        bool            EXT_platform_x11;
-        bool            EXT_platform_wayland;
-        bool            EXT_present_opaque;
-        bool            ANGLE_platform_angle;
-        bool            ANGLE_platform_angle_opengl;
-        bool            ANGLE_platform_angle_d3d;
-        bool            ANGLE_platform_angle_vulkan;
-        bool            ANGLE_platform_angle_metal;
-        bool            MESA_platform_surfaceless;
+        GLFWbool        KHR_create_context;
+        GLFWbool        KHR_create_context_no_error;
+        GLFWbool        KHR_gl_colorspace;
+        GLFWbool        KHR_get_all_proc_addresses;
+        GLFWbool        KHR_context_flush_control;
+        GLFWbool        EXT_client_extensions;
+        GLFWbool        EXT_platform_base;
+        GLFWbool        EXT_platform_x11;
+        GLFWbool        EXT_platform_wayland;
+        GLFWbool        EXT_present_opaque;
+        GLFWbool        ANGLE_platform_angle;
+        GLFWbool        ANGLE_platform_angle_opengl;
+        GLFWbool        ANGLE_platform_angle_d3d;
+        GLFWbool        ANGLE_platform_angle_vulkan;
+        GLFWbool        ANGLE_platform_angle_metal;
+        GLFWbool        MESA_platform_surfaceless;
 
         void*           handle;
 
@@ -872,14 +870,14 @@ struct _GLFWlibrary
         void*           handle;
         char*           extensions[2];
         PFN_vkGetInstanceProcAddr GetInstanceProcAddr;
-        bool            KHR_surface;
-        bool            KHR_win32_surface;
-        bool            MVK_macos_surface;
-        bool            EXT_metal_surface;
-        bool            KHR_xlib_surface;
-        bool            KHR_xcb_surface;
-        bool            KHR_wayland_surface;
-        bool            EXT_headless_surface;
+        GLFWbool        KHR_surface;
+        GLFWbool        KHR_win32_surface;
+        GLFWbool        MVK_macos_surface;
+        GLFWbool        EXT_metal_surface;
+        GLFWbool        KHR_xlib_surface;
+        GLFWbool        KHR_xcb_surface;
+        GLFWbool        KHR_wayland_surface;
+        GLFWbool        EXT_headless_surface;
     } vk;
 
     struct {

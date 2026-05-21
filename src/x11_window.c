@@ -1308,7 +1308,7 @@ static void processEvent(XEvent *event)
 
                 _glfwInputKey(window, key, keycode, GLFW_PRESS, mods);
 
-                const uint32_t codepoint = _glfwKeySym2UnicodeX11(keysym);
+                const uint32_t codepoint = _glfwKeySym2Unicode(keysym);
                 if (codepoint != GLFW_INVALID_CODEPOINT)
                     _glfwInputChar(window, codepoint, mods, plain);
             }
@@ -2950,7 +2950,7 @@ const char* _glfwGetScancodeNameX11(int scancode)
     if (keysym == NoSymbol)
         return NULL;
 
-    const uint32_t codepoint = _glfwKeySym2UnicodeX11(keysym);
+    const uint32_t codepoint = _glfwKeySym2Unicode(keysym);
     if (codepoint == GLFW_INVALID_CODEPOINT)
         return NULL;
 

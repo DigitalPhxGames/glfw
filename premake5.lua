@@ -1,9 +1,11 @@
-project "GLFW"
+-- Copyright Digital Phoenix LLC. All Rights Reserved.
+
+project "glfw"
     kind "StaticLib"
     language "C"
     staticruntime "Off"
 
-    targetdir ("%{wks.location}/Engine/Binaries/ThirdParty")
+    targetdir ("%{wks.location}/Engine/Binaries/ThirdParty/%{prj.name}")
     objdir ("%{wks.location}/Engine/Intermediate/%{cfg.platform}/%{cfg.buildcfg}/%{prj.name}")
 
     files
@@ -82,12 +84,8 @@ project "GLFW"
     filter "configurations:Debug"
         runtime "Debug"
         symbols "On"
-        
-    filter "configurations:Development"
-        runtime "Release"
-        optimize "On"
-        symbols "On"
-        
+
     filter "configurations:Release"
         runtime "Release"
         optimize "On"
+        symbols "Off"
